@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>채팅방 입장</title>
+</head>
+<body>
+<h2>채팅방 입장</h2>
+<form th:action="@{/chat/{roomId}/join(roomId=${roomId})}" method="post">
+    <label>이름 입력: <input type="text" name="username" required></label>
+    <button type="submit">입장</button>
+</form>
+</body>
+</html>

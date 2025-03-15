@@ -1,0 +1,74 @@
+= 테스트 Asciidoc 문서
+Author Name <author@example.com>
+2025-01-26
+
+:toc: left
+:toc-title: 목차
+:sectnums:
+:source-highlighter: highlight.js
+
+== 소개
+
+이 문서는 Asciidoc의 다양한 요소를 테스트하기 위해 작성되었습니다.
+
+== 주요 특징
+
+Asciidoc 문서는 다음과 같은 기능을 제공합니다:
+
+. 간단한 문법
+. 표(table) 지원
+. 코드 하이라이팅
+. 이미지 및 링크 추가
+
+== 예제
+
+=== 1. 코드 블록
+
+Python 코드를 예제로 작성해보겠습니다:
+
+[source,python]
+----
+def hello_world():
+    print("Hello, Asciidoc!")
+----
+
+=== 2. 리스트
+
+다양한 리스트 예제입니다:
+
+==== 순서가 있는 리스트
+. 첫 번째 항목
+. 두 번째 항목
+. 세 번째 항목
+
+==== 순서가 없는 리스트
+* 항목 1
+* 항목 2
+** 하위 항목 2-1
+** 하위 항목 2-2
+* 항목 3
+
+=== 3. 표
+
+[cols="1,3,2", options="header"]
+|===
+| 번호 | 항목 이름 | 설명
+| 1 | 테스트 | 간단한 테스트 항목
+| 2 | 샘플 | 샘플 데이터를 표시
+| 3 | 문서화 | 문서를 위한 항목
+|===
+
+=== 4. 이미지 추가
+
+이미지를 추가하는 방법은 다음과 같습니다:
+
+image::https://via.placeholder.com/300x100[Placeholder Image,300,100]
+
+=== 5. 링크
+
+외부 링크를 추가할 수 있습니다:
+https://asciidoctor.org[Asciidoctor 공식 문서]
+
+== 결론
+
+Asciidoc은 문서를 효율적으로 작성할 수 있는 강력한 도구입니다.

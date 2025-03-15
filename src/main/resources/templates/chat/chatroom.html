@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>채팅방</title>
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1.5.1/dist/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+</head>
+<body>
+<h2 th:text="'채팅방: ' + ${roomId}"></h2>
+<h3 th:text="'사용자: ' + ${username}"></h3>
+
+<div id="chat-box">
+    <ul id="messageArea"></ul>
+</div>
+
+<input type="text" id="messageInput" placeholder="메시지를 입력하세요..." />
+<button onclick="sendMessage()">전송</button>
+
+<a href="/chat/">채팅방 목록으로</a>
+
+<script>
+    var username = "[[${username}]]";
+    var roomId = "[[${roomId}]]";
+
+    var socket = new SockJS('/ws-chat');
+    var stompClient = Stomp.over(socket);
+
+    stompClient.connect({}, function () {
+        stompClient.subscribe('/topic/chat/' + roomId, function (message) {
+            showMessage(JSON.parse(message.body));
+        });
+
+        stompClient.send("/app/chat.addUser", {}, JSON.stringify({
+            sender: username,
+            type: "ENTER",
+            roomId: roomId,
+            content: username + "님이 입장했습니다."
+        }));
+    });
+
+    function sendMessage() {
+        var messageContent = document.getElementById("messageInput").value;
+        if (messageContent) {
+            var chatMessage = {
+                sender: username,
+                content: messageContent,
+                type: "CHAT",
+                roomId: roomId
+            };
+
+            stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
+            document.getElementById("messageInput").value = "";
+        }
+    }
+
+    function showMessage(message) {
+        var messageArea = document.getElementById("messageArea");
+        var li = document.createElement("li");
+        li.textContent = message.sender + ": " + message.content;
+        messageArea.appendChild(li);
+    }
+</script>
+</body>
+</html>
